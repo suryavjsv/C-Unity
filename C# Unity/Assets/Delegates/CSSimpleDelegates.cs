@@ -19,15 +19,20 @@ using UnityEngine;
 
 public class CSSimpleDelegates : MonoBehaviour
 {
-    public delegate void TestOneDelegate(byte x); // SYNTAX : declaring simple delegate with arugument without event
     /*
         You may wonder what is byte keyword passing as arg
         > byte - 8 Bit unsigned integer
         > Range from 0 to 255
     */
-    
+    public delegate void TestOneDelegate(byte x); // SYNTAX : declaring simple delegate with arugument without event
     private TestOneDelegate testOneDelegateFunction;
 
+
+    public delegate bool TestTwoDelegate(int a);
+    private TestTwoDelegate testTwoDelegateFunction;
+
+    public delegate void TestThreeDelegate();
+    private TestThreeDelegate testThreeDelegateFunction;
     // Start is called before the first frame update
     void Start()
     {
@@ -45,6 +50,15 @@ public class CSSimpleDelegates : MonoBehaviour
             OP will be | a = 3
             we can assign a function inside a field 
         */
+
+
+        //Another way of using Delegates with arg         
+        testTwoDelegateFunction = (int x) => { return x % 2 == 0; };
+        Debug.Log(testTwoDelegateFunction(4)); //OP is True
+
+        //Simple way of using delegates without arg
+        testThreeDelegateFunction = () => { Debug.Log("Hi There I'm a 3rd delegate"); } ;
+        testThreeDelegateFunction(); //OP is Hi There I'm a 3rd delegate
     }
 
     void FunctionForTest1Delegate(byte x)
